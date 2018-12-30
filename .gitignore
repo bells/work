@@ -1,3 +1,9 @@
 .project
 .class
 .settings
+.gradle
+.idea
+gradlew
+gradlew.bat
+gradle/
+out/
