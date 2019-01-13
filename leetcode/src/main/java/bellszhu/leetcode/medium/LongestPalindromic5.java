@@ -7,8 +7,8 @@ package bellszhu.leetcode.medium;
 public class LongestPalindromic5 {
 
     public static void main(String[] args) {
-        String s = "aaa";
-        System.out.println(longestPalindrome(s));
+        String s = "cbbd";
+        System.out.println(longestPalindrome2(s));
     }
 
     /**
@@ -52,6 +52,52 @@ public class LongestPalindromic5 {
 
         }
         return s.substring(start, start + length);
+    }
+
+    /**
+     * time: O(n^2)
+     * space: O(1)
+     * 这里把奇数，偶数情况合起来处理
+     * @param s
+     * @return
+     */
+    public static String longestPalindrome2(String s) {
+        if (s == null || s.equals("")) {
+            return "";
+        }
+        String result = "";
+        for (int i = 0; i < s.length(); i++) {
+            String result1 = helper(s, i, i);
+            if (result1.length() >= result.length()) {
+                result = result1;
+            }
+            int next = Math.min(i + 1, s.length() - 1);
+            if (s.charAt(i) == s.charAt(next)) {
+                String result2 = helper(s, i, Math.min(i + 1, s.length() - 1));
+                if (result2.length() >= result.length()) {
+                    result = result2;
+                }
+            }
+
+        }
+        return result;
+    }
+    private static String helper(String s, int left, int right) {
+        while (left > 0 && right < s.length() - 1 && s.charAt(left - 1) == s.charAt(right + 1)) {
+            left--;
+            right++;
+        }
+        return s.substring(left, right+1);
+    }
+
+    /**
+     * DP
+     * time: O(n^2)
+     * space: O(n^2)
+     */
+    public static String longestPalindromeDp(String s) {
+        // TODO
+        return s;
     }
 
     /**
